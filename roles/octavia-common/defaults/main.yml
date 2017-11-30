@@ -54,7 +54,7 @@ health_manager:
   members: "{{ OCT_API.consumes_OCT_HMX.members.private }}"
   heartbeat_key: "{{ OCT_API.consumes_OCT_HMX.vars.heartbeat_key }}"
 
-octavia_db_connection: "mysql://{{ mysql.octavia_user }}:{{ mysql.octavia_password | urlencode }}@{{ mysql.host }}/octavia{% if mysql.use_tls %}{{ mysql.ca }}{% endif %}"
+octavia_db_connection: "mysql+pymysql://{{ mysql.octavia_user }}:{{ mysql.octavia_password | urlencode }}@{{ mysql.host }}/octavia{% if mysql.use_tls %}{{ mysql.ca }}{% endif %}"
 
 # Other variables
 octavia_endpoint_type: "internalURL"
