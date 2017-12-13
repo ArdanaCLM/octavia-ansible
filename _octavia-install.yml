@@ -16,7 +16,7 @@
 #
 ---
 - hosts: OCT-API:OCT-HMX
-  sudo: yes
+  become: true
   roles:
     - octavia-common
 

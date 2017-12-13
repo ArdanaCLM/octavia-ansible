@@ -50,7 +50,7 @@
 
 # Configure Octavia for the new image id
 - hosts: OCT-API
-  sudo: yes
+  become: true
   roles:
     - octavia-common
   vars:

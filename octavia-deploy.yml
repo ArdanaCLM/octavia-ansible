@@ -28,7 +28,7 @@
     - include: roles/octavia-common/tasks/tls_copy.yml
 
 - hosts: OCT-API
-  sudo: yes
+  become: true
   roles:
   - octavia-post-configure
   tasks:
@@ -36,7 +36,7 @@
     ansible_python_interpreter: "{{ KEY_CLI.vars.keystone_client_python_interpreter }}"
 
 - hosts: OCT-API:OCT-HMX
-  sudo: yes
+  become: true
   roles:
   - octavia-common
   tasks:
@@ -45,14 +45,14 @@
   - include: roles/octavia-common/tasks/start.yml
 
 - hosts: OCT-API
-  sudo: yes
+  become: true
   roles:
   - octavia-post-configure
   tasks:
   - include: roles/octavia-post-configure/tasks/db_configure.yml
 
 - hosts: OCT-API
-  sudo: yes
+  become: true
   roles:
     - octavia-post-configure
   tasks:
@@ -60,7 +60,7 @@
       ansible_python_interpreter: "{{ NOV_CLI.vars.nova_client_python_interpreter }}"
 
 - hosts: OCT-API
-  sudo: yes
+  become: true
   roles:
     - octavia-post-configure
   tasks:
@@ -68,7 +68,7 @@
       ansible_python_interpreter: "{{ NEU_CLI.vars.neutron_client_python_interpreter }}"
 
 - hosts: OCT-API
-  sudo: yes
+  become: true
   roles:
   - octavia-common
   - octavia-api
@@ -77,7 +77,7 @@
   - include: roles/octavia-api/tasks/start.yml
 
 - hosts: OCT-API
-  sudo: yes
+  become: true
   roles:
   - octavia-common
   - octavia-worker
@@ -87,7 +87,7 @@
   - include: roles/octavia-worker/tasks/start.yml
 
 - hosts: OCT-HMX
-  sudo: yes
+  become: true
   roles:
   - octavia-common
   - octavia-health-manager
@@ -96,7 +96,7 @@
   - include: roles/octavia-health-manager/tasks/start.yml
 
 - hosts: OCT-API
-  sudo: yes
+  become: true
   roles:
   - octavia-common
   - octavia-housekeeping

@@ -16,7 +16,7 @@
 #
 ---
 - hosts: OCT-API:OCT-HMX
-  sudo: yes
+  become: true
   roles:
     - octavia-common
 
@@ -24,7 +24,7 @@
     - include: roles/octavia-common/tasks/configure.yml
 
 - hosts: OCT-API
-  sudo: yes
+  become: true
   roles:
     - octavia-common
     - octavia-api
@@ -33,7 +33,7 @@
     - include: roles/octavia-api/tasks/configure.yml
 
 - hosts: OCT-API
-  sudo: yes
+  become: true
   roles:
     - octavia-common
     - octavia-worker
@@ -43,7 +43,7 @@
   - include: roles/octavia-worker/tasks/configure.yml
 
 - hosts: OCT-HMX
-  sudo: yes
+  become: true
   roles:
   - octavia-common
   - octavia-health-manager
@@ -52,7 +52,7 @@
   - include: roles/octavia-health-manager/tasks/configure.yml
 
 - hosts: OCT-API
-  sudo: yes
+  become: true
   roles:
   - octavia-common
   - octavia-housekeeping
