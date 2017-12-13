@@ -29,6 +29,7 @@
     OS_PROJECT_DOMAIN_NAME: "{{ octavia_project_domain_name }}"
     OS_ENDPOINT_TYPE: "{{ octavia_endpoint_type }}"
     OS_REGION_NAME: "{{ octavia_region_name }}"
+    OS_CACERT: "{{ octavia_ca_file }}"
     OS_IDENTITY_API_VERSION: "3"
     OS_AUTH_VERSION: "3"
   register: octavia_mgmt_subnet
@@ -46,6 +47,7 @@
     OS_PROJECT_DOMAIN_NAME: "{{ octavia_project_domain_name }}"
     OS_ENDPOINT_TYPE: "{{ octavia_endpoint_type }}"
     OS_REGION_NAME: "{{ octavia_region_name }}"
+    OS_CACERT: "{{ octavia_ca_file }}"
     OS_IDENTITY_API_VERSION: "3"
     OS_AUTH_VERSION: "3"
   register: octavia_mgmt_subnet

@@ -40,6 +40,7 @@
     openstack_user_domain_name: "{{ octavia_user_domain_name }}"
     openstack_project_domain_name: "{{ octavia_project_domain_name }}"
     openstack_endpoint_type: "{{ octavia_endpoint_type }}"
+    openstack_ca_file: "{{ octavia_ca_file }}"
     openstack_insecure: False
   tasks:
     - include: roles/service-guest-image/tasks/copy_image_file.yml

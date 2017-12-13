@@ -39,4 +39,5 @@
     OS_PROJECT_DOMAIN_NAME: "{{ octavia_project_domain_name }}"
     OS_ENDPOINT_TYPE: "{{ octavia_endpoint_type }}"
     OS_REGION_NAME: "{{ octavia_region_name }}"
+    OS_CACERT: "{{ octavia_ca_file }}"
   run_once_per: verb_hosts.OCT_API
