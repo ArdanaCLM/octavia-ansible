@@ -32,7 +32,7 @@
     - include: roles/octavia-common/tasks/tls_copy.yml
 
 - hosts: OCT-API
-  become: true
+  become: yes
   roles:
   - octavia-post-configure
   tasks:
@@ -43,7 +43,7 @@
 - include: _octavia-configure.yml
 
 - hosts: OCT-API
-  become: true
+  become: yes
   roles:
   - octavia-post-configure
   tasks:

@@ -50,7 +50,7 @@
 
 # Configure Octavia for the new image id
 - hosts: OCT-API
-  become: true
+  become: yes
   roles:
     - octavia-common
   vars:

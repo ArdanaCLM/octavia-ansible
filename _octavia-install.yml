@@ -16,7 +16,7 @@
 #
 ---
 - hosts: OCT-API:OCT-HMX
-  become: true
+  become: yes
   roles:
     - octavia-common
 
