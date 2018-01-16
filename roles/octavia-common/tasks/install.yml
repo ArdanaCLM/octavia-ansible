@@ -20,6 +20,7 @@
 # Install Octavia
 
 - name: octavia-common | install | Update venv cache
+  become: yes
   install_package:
     cache: update
 
