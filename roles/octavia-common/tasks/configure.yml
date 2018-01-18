@@ -52,7 +52,7 @@
   file: path=/var/log/octavia owner={{ octavia_user }} group={{ octavia_group }} mode=0775 state=directory
 
 - name: octavia-common | configure | Create /var/lib/octavia directory
-  file: path=/var/lib/octavia owner={{ octavia_user }} group={{ octavia_group }} mode=0775 state=directory
+  file: path=/var/lib/octavia owner={{ octavia_user }} group={{ octavia_group }} mode=0770 state=directory
 
 # Note this also sets the ownership and mode if the directory already exists.
 - name: octavia-common | configure | Create systemd service directory if not exists
