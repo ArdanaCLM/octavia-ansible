@@ -1,6 +1,6 @@
 #
 # (c) Copyright 2016-2017 Hewlett Packard Enterprise Development LP
-# (c) Copyright 2017 SUSE LLC
+# (c) Copyright 2017-2018 SUSE LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -64,3 +64,20 @@
   set_fact:
     octavia_amp_image_id: "{{ octavia_image_id_results.stdout }}"
   when: project_id_results | success and octavia_image_id_results | success
+
+- name: octavia-common | _get_glance_image | Set octavia image tag
+  command: openstack \
+     image set --tag {{ octavia_amp_image_tag }} {{ octavia_amp_image_id }}
+  environment:
+    OS_AUTH_URL: "{{ keystone_endpoint }}"
+    OS_USERNAME: "{{ keystone_admin_user }}"
+    OS_PASSWORD: "{{ keystone_admin_password }}"
+    OS_USER_DOMAIN_NAME: "{{ keystone_default_domain }}"
+    OS_DOMAIN_NAME: "{{ keystone_default_domain }}"
+    OS_ENDPOINT_TYPE: "{{ octavia_endpoint_type }}"
+    OS_REGION_NAME: "{{ octavia_region_name }}"
+    OS_CACERT: "{{ octavia_ca_file }}"
+    OS_IDENTITY_API_VERSION: "3"
+    OS_AUTH_VERSION: "3"
+  when: octavia_image_id_results.stdout | length > 0
+  run_once: True
