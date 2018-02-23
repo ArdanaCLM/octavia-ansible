@@ -1,6 +1,6 @@
 #
 # (c) Copyright 2016 Hewlett Packard Enterprise Development LP
-# (c) Copyright 2017 SUSE LLC
+# (c) Copyright 2017-2018 SUSE LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -56,6 +56,17 @@
     - octavia-common
   vars:
     octavia_amp_image_id: "{{service_guest_image_id.stdout}}"
+  tasks:
+    - include: roles/octavia-common/tasks/configure.yml
+      when: SERVICE_NAME == 'octavia'
+
+# Configure Octavia for the new image tag
+- hosts: OCT-API
+  become: yes
+  roles:
+    - octavia-common
+  vars:
+    octavia_amp_image_tag: "{{service_guest_image_tag.stdout}}"
   tasks:
     - include: roles/octavia-common/tasks/configure.yml
       when: SERVICE_NAME == 'octavia'

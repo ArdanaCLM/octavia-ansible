@@ -1,6 +1,6 @@
 #
 # (c) Copyright 2016-2017 Hewlett Packard Enterprise Development LP
-# (c) Copyright 2017 SUSE LLC
+# (c) Copyright 2017-2018 SUSE LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -132,6 +132,7 @@ octavia_mgmt_sec_group: "lb-mgmt-sec-group"
 octavia_nova_flavor_name: "m1.lbaas.amphora"
 # This is set later once the image is unpacked
 octavia_amp_image_id: ""
+octavia_amp_image_tag: "amphora"
 
 octavia_user_domain_name: "{{ keystone.default_domain_name }}"
 octavia_project_domain_name: "{{ keystone.default_domain_name }}"
