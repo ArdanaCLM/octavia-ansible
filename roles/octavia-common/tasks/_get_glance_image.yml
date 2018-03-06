@@ -79,5 +79,5 @@
     OS_CACERT: "{{ octavia_ca_file }}"
     OS_IDENTITY_API_VERSION: "3"
     OS_AUTH_VERSION: "3"
-  when: octavia_image_id_results.stdout | length > 0
+  when: octavia_image_id_results.stdout | length > 0 and not (deployer_media_legacy_layout | bool)
   run_once: True
