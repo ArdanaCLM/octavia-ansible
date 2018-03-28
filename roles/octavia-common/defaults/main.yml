@@ -21,7 +21,7 @@ mysql:
   octavia_user: "{{ OCT_API.consumes_FND_MDB.vars.accounts.octavia.username }}"
   octavia_password: "{{ OCT_API.consumes_FND_MDB.vars.accounts.octavia.password | quote }}"
   use_tls: "{{ OCT_API.consumes_FND_MDB.vips.private[0].use_tls }}"
-  ca: "?ssl_ca=/etc/ssl/certs/ca-certificates.crt"
+  ca: "?ssl_ca={{ trusted_ca_bundle }}"
 
 keystone:
   admin_tenant: "{{ KEY_API.vars.keystone_admin_tenant }}"
@@ -107,7 +107,7 @@ octavia_auth_endpoint: "{{ keystone.endpoint }}"
 octavia_identity_uri: "{{ keystone.identity_uri }}"
 octavia_admin_user: "{{ keystone.octavia_admin_user }}"
 octavia_admin_password: "{{ keystone.octavia_admin_password }}"
-octavia_ca_file: "/etc/ssl/certs/ca-certificates.crt"
+octavia_ca_file: "{{ trusted_ca_bundle }}"
 
 ## [certificates]
 octavia_ca_private_key_passphrase: "foobar"
