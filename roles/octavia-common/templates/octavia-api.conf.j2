@@ -40,15 +40,15 @@ heartbeat_key = {{ octavia_heartbeat_key }}
 [keystone_authtoken]
 auth_version = 3
 auth_uri = {{ octavia_auth_endpoint }}
-admin_user = {{ octavia_admin_user }}
-admin_password = {{ octavia_admin_password }}
-admin_tenant_name = {{ octavia_project_name }}
-cafile = {{ octavia_ca_file }}
-
-[keystone_authtoken_v3]
+auth_url = {{ octavia_auth_endpoint }}
+auth_type = password
 project_name = {{ octavia_project_name }}
-admin_user_domain = {{ octavia_user_domain_name }}
-admin_project_domain = {{ octavia_project_domain_name }}
+project_domain_name = Default
+user_domain_name = Default
+username = {{ octavia_admin_user }}
+password = {{ octavia_admin_password }}
+region_name = {{ octavia_region_name }}
+cafile = {{ octavia_ca_file }}
 
 [certificates]
 cert_generator = local_cert_generator
@@ -93,6 +93,19 @@ rabbit_use_ssl = {{ octavia_rabbit_use_ssl }}
 [oslo_messaging]
 topic = octavia_prov
 rpc_thread_pool_size = 2
+
+[service_auth]
+auth_version = 3
+auth_uri = {{ octavia_auth_endpoint }}
+auth_url = {{ octavia_auth_endpoint }}
+auth_type = password
+project_name = {{ octavia_project_name }}
+project_domain_name = Default
+user_domain_name = Default
+username = {{ octavia_admin_user }}
+password = {{ octavia_admin_password }}
+region_name = {{ octavia_region_name }}
+cafile = {{ octavia_ca_file }}
 
 [neutron]
 endpoint = {{ neutron_endpoint }}
