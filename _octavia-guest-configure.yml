@@ -21,13 +21,6 @@
   tasks:
     - set_fact:
         SRC_GUEST_IMAGE_DIR: "{{ hostvars.localhost.src_guest_image_tempdir.stdout}}"
-      when: deployer_media_legacy_layout | bool
-
-- hosts: OCT-API
-  tasks:
-    - set_fact:
-        SRC_GUEST_IMAGE_DIR: "/srv/tftpboot/files/openstack-octavia-amphora-image"
-      when: not (deployer_media_legacy_layout | bool)
 
 - hosts: OCT-API
   tasks:
