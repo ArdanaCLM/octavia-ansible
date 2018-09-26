@@ -36,6 +36,10 @@ bind_ip = {{ octavia_healthmanager_bind_host }}
 bind_port = {{ octavia_healthmanager_port }}
 controller_ip_port_list = {{ octavia_healthmanager_hosts }}
 heartbeat_key = {{ octavia_heartbeat_key }}
+event_streamer_driver = queue_event_streamer
+heartbeat_interval = 10
+heartbeat_timeout = 180
+health_check_interval = 3
 
 [keystone_authtoken]
 auth_version = 3
@@ -67,7 +71,7 @@ connection_max_retries = 10
 connection_retry_interval = 10
 
 [controller_worker]
-amp_active_retries = 10
+amp_active_retries = 40
 amp_active_wait_sec = 10
 amp_flavor_id = {{ octavia_nova_flavor_id.stdout}}
 amp_image_id = {{ octavia_amp_image_id }}
@@ -78,6 +82,7 @@ client_ca = {{ octavia_client_ca }}
 compute_driver = compute_nova_driver
 amphora_driver = amphora_haproxy_rest_driver
 network_driver = allowed_address_pairs_driver
+loadbalancer_topology = SINGLE
 #amp_ssh_key_name =
 
 [oslo_messaging_rabbit]
@@ -106,6 +111,9 @@ username = {{ octavia_admin_user }}
 password = {{ octavia_admin_password }}
 region_name = {{ octavia_region_name }}
 cafile = {{ octavia_ca_file }}
+
+[networking]
+port_detach_timeout = 900
 
 [neutron]
 endpoint = {{ neutron_endpoint }}
