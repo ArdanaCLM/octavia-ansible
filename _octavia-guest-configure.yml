@@ -25,17 +25,7 @@
 - hosts: OCT-API
   tasks:
     - set_fact:
-        GUEST_IMAGE_METADATA: "{{ hostvars.localhost.guest_image_metadata.ansible_facts.metadata }}"
-        SERVICE_NAME: "{{ hostvars.localhost.guest_image_metadata.ansible_facts.service }}"
-        PRODUCT: "{{ hostvars.localhost.guest_image_metadata.ansible_facts.product }}"
-        IMAGE_NAME: "{{ hostvars.localhost.guest_image_metadata.ansible_facts.name }}"
-      when: deployer_media_legacy_layout | bool
-
-- hosts: OCT-API
-  tasks:
-    - set_fact:
         SRC_GUEST_IMAGE_FILE_NAME: "{{ hostvars.localhost.src_octavia_image_file_name.stdout }}"
-      when: not (deployer_media_legacy_layout | bool)
 
 - hosts: OCT-API
   tasks:
@@ -43,7 +33,6 @@
         SERVICE_NAME: "{{ SRC_GUEST_IMAGE_FILE_NAME.split('-')[1] }}"
         IMAGE_NAME: "{{ SRC_GUEST_IMAGE_FILE_NAME.split('.')[0] }}"
         IMAGE_VERSION: "{{ SRC_GUEST_IMAGE_FILE_NAME.split('-')[-1][:5] }}"
-      when: not (deployer_media_legacy_layout | bool)
 
 # Copy the image file to OCT-API and upload it to glance
 - hosts: OCT-API
@@ -86,10 +75,9 @@
     - octavia-common
   vars:
     octavia_amp_image_tag: "amphora"
-    when: not (deployer_media_legacy_layout | bool)
   tasks:
     - include: roles/octavia-common/tasks/configure.yml
-      when: SERVICE_NAME == 'octavia' and not (deployer_media_legacy_layout | bool)
+      when: SERVICE_NAME == 'octavia'
 
 # Restart the services to pick up the image ID
 - include: octavia-stop.yml
