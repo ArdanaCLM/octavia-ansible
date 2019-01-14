@@ -20,13 +20,15 @@
 # Changes may be made to this file by customers.
 
 [DEFAULT]
-api_handler = queue_producer
 debug = True
-bind_host = {{ octavia_bind_host }}
-bind_port = {{ octavia_bind_port }}
 #os_region_name = region1
 os_endpoint_type = {{ octavia_endpoint_type }}
 log_config_append = "{{ octavia_conf_dir }}/octavia-api-logging.conf"
+
+[api_settings]
+api_handler = queue_producer
+bind_host = {{ octavia_bind_host }}
+bind_port = {{ octavia_bind_port }}
 
 [database]
 connection = {{ octavia_db_connection }}

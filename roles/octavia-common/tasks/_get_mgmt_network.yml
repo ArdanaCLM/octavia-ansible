@@ -19,7 +19,7 @@
 
 - name: octavia-common | _get_mgmt_network | Get management network for single-cp
   shell: >
-    neutron net-list | grep {{ octavia_mgmt_net }} | tr -d ' ' | cut -f 2 -d '|'
+    openstack network list | grep {{ octavia_mgmt_net }} | tr -d ' ' | cut -f 2 -d '|'
   environment: &OS_ENV
     OS_AUTH_URL: "{{ octavia_auth_endpoint }}"
     OS_USERNAME: "{{ octavia_admin_user }}"
@@ -32,12 +32,13 @@
     OS_CACERT: "{{ octavia_ca_file }}"
     OS_IDENTITY_API_VERSION: "3"
     OS_AUTH_VERSION: "3"
+    OS_INTERFACE: "internal"
   register: octavia_mgmt_net_id
   run_once: true
 
 - name: octavia-common | _get_mgmt_network | Get management network for multi-cp
   shell: >
-    neutron net-list | grep {{ octavia_mgmt_net }} | tr -d ' ' | cut -f 2 -d '|'
+    openstack network list | grep {{ octavia_mgmt_net }} | tr -d ' ' | cut -f 2 -d '|'
   environment:
     OS_AUTH_URL: "{{ octavia_auth_endpoint }}"
     OS_USERNAME: "{{ octavia_admin_user }}"
@@ -50,6 +51,7 @@
     OS_CACERT: "{{ octavia_ca_file }}"
     OS_IDENTITY_API_VERSION: "3"
     OS_AUTH_VERSION: "3"
+    OS_INTERFACE: "internal"
   register: octavia_mgmt_net_id
   run_once_per: verb_hosts.OCT_API
 

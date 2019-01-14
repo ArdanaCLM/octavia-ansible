@@ -19,7 +19,7 @@
 
 - name: octavia-common | _create_mgmt_sec_group | Retrieve management subnet for single-cp
   shell: >
-    neutron net-show {{ octavia_mgmt_net_id.stdout }} | tr -d ' ' | grep "subnets" | cut -f 3 -d '|'
+    openstack network show {{ octavia_mgmt_net_id.stdout }} | tr -d ' ' | grep "subnets" | cut -f 3 -d '|'
   environment: &OS_ENV
     OS_AUTH_URL: "{{ octavia_auth_endpoint }}"
     OS_USERNAME: "{{ octavia_admin_user }}"
@@ -32,12 +32,13 @@
     OS_CACERT: "{{ octavia_ca_file }}"
     OS_IDENTITY_API_VERSION: "3"
     OS_AUTH_VERSION: "3"
+    OS_INTERFACE: "internal"
   register: octavia_mgmt_subnet
   run_once: true
 
 - name: octavia-common | _create_mgmt_sec_group | Retrieve management subnet for multi-cp
   shell: >
-    neutron net-show {{ octavia_mgmt_net_id.stdout }} | tr -d ' ' | grep "subnets" | cut -f 3 -d '|'
+    openstack network show {{ octavia_mgmt_net_id.stdout }} | tr -d ' ' | grep "subnets" | cut -f 3 -d '|'
   environment:
     OS_AUTH_URL: "{{ octavia_auth_endpoint }}"
     OS_USERNAME: "{{ octavia_admin_user }}"
@@ -50,6 +51,7 @@
     OS_CACERT: "{{ octavia_ca_file }}"
     OS_IDENTITY_API_VERSION: "3"
     OS_AUTH_VERSION: "3"
+    OS_INTERFACE: "internal"
   register: octavia_mgmt_subnet
   run_once_per: verb_hosts.OCT_API
 
@@ -61,7 +63,7 @@
 
 - name: octavia-common | _create_mgmt_sec_group | Check if management security group exists
   shell: >
-    neutron security-group-show {{ octavia_mgmt_sec_group }}
+    openstack security group show {{ octavia_mgmt_sec_group }}
   environment: *OS_ENV
   register: octavia_mgmt_sec_group_check
   ignore_errors: True
@@ -69,28 +71,28 @@
 
 - name: octavia-common | _create_mgmt_sec_group | Create management security group
   shell: >
-    neutron security-group-create {{ octavia_mgmt_sec_group }} --description "Octavia Management Security Group"
+    openstack security group create {{ octavia_mgmt_sec_group }} --description "Octavia Management Security Group"
   environment: *OS_ENV
   when: octavia_mgmt_sec_group_check|failed
   run_once_per: verb_hosts.OCT_API
 
 - name: octavia-common | _create_mgmt_sec_group | Get management security group id
   shell: >
-    neutron security-group-list| grep {{ octavia_mgmt_sec_group }} | tr -d ' ' | cut -f 2 -d '|'
+    openstack security group list| grep {{ octavia_mgmt_sec_group }} | tr -d ' ' | cut -f 2 -d '|'
   environment: *OS_ENV
   register: octavia_mgmt_sec_group_id
   run_once: true
 
 - name: octavia-common | _create_mgmt_sec_group | Get management security group id
   shell: >
-    neutron security-group-list| grep {{ octavia_mgmt_sec_group }} | tr -d ' ' | cut -f 2 -d '|'
+    openstack security group list| grep {{ octavia_mgmt_sec_group }} | tr -d ' ' | cut -f 2 -d '|'
   environment: *OS_ENV
   register: octavia_mgmt_sec_group_id
   run_once_per: verb_hosts.OCT_API
 
 - name: octavia-common | _create_mgmt_sec_group | rule, TCP 9443
   shell: >
-    neutron security-group-rule-create --protocol tcp --port-range-min 9443 --port-range-max 9443 {{ octavia_mgmt_sec_group }}
+    openstack security group rule create --protocol tcp --dst-port 9443:9443 {{ octavia_mgmt_sec_group }}
   environment: *OS_ENV
   ignore_errors: True
   run_once_per: verb_hosts.OCT_API
