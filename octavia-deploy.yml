@@ -56,15 +56,7 @@
   roles:
     - octavia-post-configure
   tasks:
-    - include: roles/octavia-post-configure/tasks/set_nova_quotas.yml
-      ansible_python_interpreter: "{{ NOV_CLI.vars.nova_client_python_interpreter }}"
-
-- hosts: OCT-API
-  become: yes
-  roles:
-    - octavia-post-configure
-  tasks:
-    - include: roles/octavia-post-configure/tasks/set_neutron_quotas.yml
+    - include: roles/octavia-post-configure/tasks/set_quotas.yml
       ansible_python_interpreter: "{{ NEU_CLI.vars.neutron_client_python_interpreter }}"
 
 - hosts: OCT-API
