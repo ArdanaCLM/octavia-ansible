@@ -24,6 +24,7 @@ debug = True
 #os_region_name = region1
 os_endpoint_type = {{ octavia_endpoint_type }}
 log_config_append = "{{ octavia_conf_dir }}/octavia-hm-logging.conf"
+transport_url = {{ octavia_transport_url }}
 
 [api_settings]
 api_handler = queue_producer
@@ -89,10 +90,7 @@ loadbalancer_topology = SINGLE
 #amp_ssh_key_name =
 
 [oslo_messaging_rabbit]
-rabbit_userid = {{ octavia_rabbit_userid }}
-rabbit_hosts = {{ octavia_rabbit_hosts }}
-rabbit_password = {{ octavia_rabbit_password }}
-rabbit_use_ssl = {{ octavia_rabbit_use_ssl }}
+ssl = {{ octavia_rabbit_use_ssl }}
 
 [oslo_messaging]
 topic = octavia_prov

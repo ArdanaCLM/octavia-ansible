@@ -103,6 +103,14 @@ octavia_rabbit_userid: "{{ rabbit.userid }}"
 octavia_rabbit_password: "{{ rabbit.password }}"
 octavia_rabbit_use_ssl: "{{ rabbit.use_ssl }}"
 
+octavia_rabbit_hosts_url: >-
+  {%- for x in rabbit.members -%}
+    {{ octavia_rabbit_userid }}:{{ octavia_rabbit_password }}@{{ x.host }}:{{ x.port }}{%- if not loop.last -%},{%- endif -%}
+  {%- endfor -%}
+octavia_transport_url: "rabbit://{{ octavia_rabbit_hosts_url }}//"
+
+
+
 ## [keystone_authtoken]
 octavia_auth_endpoint: "{{ keystone.endpoint }}"
 octavia_identity_uri: "{{ keystone.identity_uri }}"
