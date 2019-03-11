@@ -46,7 +46,7 @@ health_check_interval = 3
 
 [keystone_authtoken]
 auth_version = 3
-auth_uri = {{ octavia_auth_endpoint }}
+www_authenticate_uri = {{ octavia_auth_endpoint }}
 auth_url = {{ octavia_auth_endpoint }}
 auth_type = password
 project_name = {{ octavia_project_name }}
