@@ -105,7 +105,7 @@
   - include: roles/octavia-housekeeping/tasks/start.yml
 
 # after everything is running, turn on monitoring
-- hosts: OCT-API:OCT-HMX
+- hosts: OCT-API:OCT-HMX:&MON-AGN
   roles:
   - octavia-common
   - { role: monasca-agent, run_mode: Use }
