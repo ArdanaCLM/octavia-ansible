@@ -1,2 +1,0 @@
-octavia ALL=(root) NOPASSWD:ALL
-Defaults:octavia !requiretty

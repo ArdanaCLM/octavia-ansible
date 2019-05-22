@@ -18,12 +18,6 @@
 # This .yml sets all facts related to Octavia_conf_dir and Octavia_bin_dir
 - include: _set_service_directories.yml
 
-- name: octavia-common | configure | copy sudoers
-  copy: src=sudoers dest=/etc/sudoers.d/octavia owner=root group=root mode=0440
-
-- name: octavia-common | configure | configure sudoers
-  lineinfile: dest=/etc/sudoers.d/octavia line='Defaults:octavia secure_path="{{ octavia_bin_dir }}:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"'
-
 - name: octavia-common | configure | Check for presence of group '{{ octavia_group }}'
   command: "grep -q {{ octavia_group }} /etc/group"
   register: group_chk_result
@@ -37,6 +31,9 @@
   command: "id {{ octavia_user }}"
   register: user_chk_result
   ignore_errors: True
+
+- name: octavia-common | configure | Delete sudoers
+  file: path=/etc/sudoers.d/octavia state=absent
 
 - name: octavia-common | configure | Add user '{{ octavia_user }}'
   user: name={{ octavia_user }} group={{ octavia_group }} system=yes createhome=no home=/var/lib/octavia shell=/bin/false
