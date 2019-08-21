@@ -49,6 +49,7 @@
 - hosts: OCT-API
   roles:
     - service-guest-image
+    - ses_common
     - octavia-common
   vars:
     GLANCE_CLIENT: glance
@@ -64,6 +65,7 @@
   tasks:
     - include: roles/service-guest-image/tasks/copy_image_file.yml
       when: SERVICE_NAME == 'octavia'
+    - include: roles/ses_common/tasks/_include_setup.yml
     - include: roles/service-guest-image/tasks/upload_image.yml
       ansible_python_interpreter: "{{ GLA_CLI.vars.glance_client_python_interpreter }}"
       when: SERVICE_NAME == 'octavia'
