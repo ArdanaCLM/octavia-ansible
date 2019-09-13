@@ -37,9 +37,9 @@ bind_port = {{ octavia_healthmanager_port }}
 controller_ip_port_list = {{ octavia_healthmanager_hosts }}
 heartbeat_key = {{ octavia_heartbeat_key }}
 event_streamer_driver = queue_event_streamer
-heartbeat_interval = 10
+heartbeat_interval = {{ octavia_heartbeat_interval }}
 heartbeat_timeout = 180
-health_check_interval = 3
+health_check_interval = {{ octavia_health_check_interval }}
 
 [keystone_authtoken]
 auth_version = 3

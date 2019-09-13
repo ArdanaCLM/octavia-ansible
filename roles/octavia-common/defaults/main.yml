@@ -96,6 +96,8 @@ octavia_healthmanager_bind_host: "{{ octavia_bind_host }}"
 octavia_healthmanager_port: "5555"
 octavia_healthmanager_hosts: "{% for x in health_manager.members %}{{ x.ip_address }}:{{ x.port }}{%if not loop.last %},{% endif %}{% endfor %}"
 octavia_heartbeat_key: "{{ health_manager.heartbeat_key }}"
+octavia_heartbeat_interval: 30
+octavia_health_check_interval: 9
 
 ### RabbitMQ
 octavia_rabbit_hosts: "{% for x in rabbit.members %}{{ x.host }}:{{ x.port }}{%if not loop.last %},{% endif %}{% endfor %}"
