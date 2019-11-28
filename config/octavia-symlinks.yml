@@ -27,3 +27,4 @@ symlinks:
   "octavia/octavia-hm-logging.conf.j2": "roles/octavia-common/templates/octavia-hm-logging.conf.j2"
   "octavia/octavia-housekeeping.conf.j2": "roles/octavia-common/templates/octavia-housekeeping.conf.j2"
   "octavia/octavia-hk-logging.conf.j2": "roles/octavia-common/templates/octavia-hk-logging.conf.j2"
+  "octavia/policy.json.j2": "roles/octavia-common/templates/policy.json.j2"

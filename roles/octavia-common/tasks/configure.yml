@@ -153,3 +153,7 @@
     owner: "root"
     group: "root"
     mode: 0664
+
+- include: _write_conf.yml
+  src: "../templates/policy.json.j2"
+  dest: "policy.json"
