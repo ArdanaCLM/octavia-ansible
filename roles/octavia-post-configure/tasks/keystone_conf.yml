@@ -77,3 +77,18 @@
     user_domain_name: "{{ octavia_user_domain_name }}"
     project_domain_name: "{{ octavia_project_domain_name }}"
   run_once: true
+
+- name: octavia-post-configure | keystone_conf | Create Octavia specific roles
+  keystone_v3:
+    action: "create_role"
+    endpoint: "{{ keystone_endpoint }}"
+    login_token: "{{ domain_scoped_token.result }}"
+    role_name: "{{ item }}"
+    description: "Octavia Role: {{ item }} role (created via octavia deploy)"
+  with_items:
+    - "{{ load_balancer_observer_role }}"
+    - "{{ load_balancer_global_observer_role }}"
+    - "{{ load_balancer_member_role }}"
+    - "{{ load_balancer_quota_admin_role }}"
+    - "{{ load_balancer_admin_role }}"
+  run_once: True
