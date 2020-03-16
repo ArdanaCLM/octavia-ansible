@@ -129,6 +129,7 @@ octavia_ca_certificate: "{{ octavia_conf_dir }}/certs/cacert.pem"
 octavia_server_ca: "{{ octavia_conf_dir}}/certs/cacert.pem"
 octavia_client_ca: "{{ octavia_conf_dir}}/certs/client_ca.pem"
 octavia_client_cert: "{{ octavia_conf_dir}}/certs/client.pem"
+octavia_client_cert_monitoring: "{{ octavia_conf_dir}}/client_monitoring.pem"
 octavia_key_path: "{{ octavia_conf_dir}}/.ssh/octavia_ssh_key"
 # haproxy_template = /var/lib/octavia/custom_template
 # The following may need to be an absolute location:

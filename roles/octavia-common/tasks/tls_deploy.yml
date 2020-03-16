@@ -41,6 +41,24 @@
       mode: 0440
   register: tls_deploy_result
 
+# NOTE(gyee): Since the provisioned client certificate is consisted of
+# both certificate and private key, we need to separate out the certificate
+# portion for monitoring without having to compromise the private key.
+# This is done by copying the certificate to a different file and make it
+# readable by the world. Making certificate readable by the world is NOT a
+# problem as it is TLS certificate is public information.
+- name: octavia-common | tls_deploy | separate out client cert for monitoring
+  become: yes
+  shell: >
+    openssl x509 -in {{ octavia_client_cert }}
+    -out {{ octavia_client_cert_monitoring }} -outform PEM
+
+- name: octavia-common | tls_deploy | Make sure monitoring cert is readable
+  become: yes
+  file:
+    path: "{{ octavia_client_cert_monitoring }}"
+    mode: '0644'
+
 - name: octavia-common  | tls_deploy | deploy client cert to server result
   command: /bin/true
   register: ardana_notify_octavia_restart_required
