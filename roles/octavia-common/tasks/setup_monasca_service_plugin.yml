@@ -20,3 +20,12 @@
   monasca_agent_plugin:
     name: "octavia"
     args: "disable_http_check=yes"
+
+- name: octavia-common | setup_monasca_service_plugin |
+        Run Monasca detection plugin for Octavia client cert
+  become: yes
+  monasca_agent_plugin:
+    name: CertificateFileCheck
+    args:
+      cert_files: "{{ octavia_client_cert_monitoring }}"
+      dimensions: "service:octavia"
