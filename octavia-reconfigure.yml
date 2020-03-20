@@ -43,4 +43,21 @@
   tasks:
   - include: roles/octavia-post-configure/tasks/db_configure.yml
 
+- hosts: OCT-API:OCT-HMX:&MON-AGN
+  roles:
+  - octavia-common
+  - { role: monasca-agent, run_mode: Use }
+
+  tasks:
+  - include: roles/octavia-common/tasks/setup_monasca_service_plugin.yml
+
+# set up active check of octavia api via vip
+- hosts: OCT-API:&MON-AGN
+  roles:
+  - octavia-common
+  - { role: monasca-agent, run_mode: Use }
+
+  tasks:
+  - include: roles/octavia-common/tasks/remote_monitor.yml
+
 - include: octavia-start.yml
