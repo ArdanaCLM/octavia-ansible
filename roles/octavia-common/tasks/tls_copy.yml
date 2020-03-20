@@ -22,7 +22,7 @@
     state: directory
 
 - name: tls-trust | cert_copy | create an internal vip cert
-  shell: "cat key.pem cert.pem >> {{ tls_cert_file }}"
+  shell: "cat key.pem cert.pem > {{ tls_cert_file }}"
   args:
     chdir: "{{ tls_temp_dir }}"
 
