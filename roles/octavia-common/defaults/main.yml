@@ -168,3 +168,11 @@ tls_cert_file: "{{ tls_certs_dir }}/client.pem"
 
 tls_server_ca_file: "serverca_01.pem"
 tls_server_ca_key_file: "servercakey.pem"
+
+# need Neutron database connection string to migrate load balancer data
+neutron_mysql:
+  db_ssl: "{% if NEU_SVR.consumes_FND_MDB.vips.private[0].use_tls %}?ssl_ca={{ trusted_ca_bundle }}{% endif %}"
+  host: "{{ NEU_SVR.consumes_FND_MDB.vips.private[0].host }}"
+  admin_user: "{{ NEU_SVR.consumes_FND_MDB.vars.accounts.neutron.username }}"
+  admin_password: "{{ NEU_SVR.consumes_FND_MDB.vars.accounts.neutron.password | quote }}"
+neutron_db_connection: "mysql+pymysql://{{ neutron_mysql.admin_user }}:{{ neutron_mysql.admin_password | urlencode }}@{{ neutron_mysql.host }}/ovs_neutron{{ neutron_mysql.db_ssl }}"

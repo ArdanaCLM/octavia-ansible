@@ -48,6 +48,7 @@
   - octavia-post-configure
   tasks:
   - include: roles/octavia-post-configure/tasks/db_configure.yml
+  - include: roles/octavia-post-configure/tasks/neutron_to_octavia_migration.yml
 
 # Restart services based on notifications set earlier
 - include: octavia-start.yml

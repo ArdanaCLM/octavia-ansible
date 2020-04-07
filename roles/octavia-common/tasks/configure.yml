@@ -157,3 +157,5 @@
 - include: _write_conf.yml
   src: "../templates/policy.json.j2"
   dest: "policy.json"
+
+- include: _install_configure_nlbaas2octavia.yml
