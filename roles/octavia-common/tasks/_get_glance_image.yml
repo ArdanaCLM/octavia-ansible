@@ -75,6 +75,7 @@
     OS_USER_DOMAIN_NAME: "{{ keystone_default_domain }}"
     OS_DOMAIN_NAME: "{{ keystone_default_domain }}"
     OS_ENDPOINT_TYPE: "{{ octavia_endpoint_type }}"
+    OS_INTERFACE: "{{ octavia_endpoint_type }}"
     OS_REGION_NAME: "{{ octavia_region_name }}"
     OS_CACERT: "{{ octavia_ca_file }}"
     OS_IDENTITY_API_VERSION: "3"
